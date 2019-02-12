@@ -27,4 +27,4 @@ GIT
  
  ## Que aprendi?
  
- 
+ En x86 la interrupcion que corresponde al kernel es la 64, esta es necesaria agregarla al ensamblador de cualquier codigo de llamada al sistema. Fue necesario agregar el ensamblador de las funiconnes de reboot yy shutdown ppara que el kernel las tenga disponibles, y ademas agregarlas a USERPROGS para que se puedan llamar desde la terminal. Los coreanos borran contenedores.
