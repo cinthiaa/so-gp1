@@ -25,6 +25,10 @@ GIT
    ++init
  
  ## Que aprendi
+ La funcion fork crea un proceso copia sobre el cual trabaja para llevar a cabo el proceso, este proceso tiene un procesos padre que se encarga de limpiar cuanod el proceso hijo ha terminado.
+ 
+ Es necesario agregar un wait despues de que se parseo el comando para que se espere a que termine.
+ 
  
  ## URL commit
  
