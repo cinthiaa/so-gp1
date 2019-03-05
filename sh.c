@@ -145,7 +145,8 @@ int
 main(void)
 {
   static char buf[100]; //aqui se guarda el comando
-  int fd;
+  static char prevbuf[100];
+  int fd,i;
 
   // Ensure that three file descriptors are open.
   while((fd = open("console", O_RDWR)) >= 0){
@@ -157,7 +158,13 @@ main(void)
 
   // Read and run input commands.
   while(getcmd(buf, sizeof(buf)) >= 0){
-    if(buf[0] == 'c' && buf[1] == 'd' && buf[2] == ' '){
+	if(buf[0] == 'p' && buf[1]=='\n'){
+		if(fork1() == 0) //si es diferente de cd 
+           runcmd(parsecmd(prevbuf));
+	    wait();
+	}
+    else{
+		if(buf[0] == 'c' && buf[1] == 'd' && buf[2] == ' '){
       // Chdir must be called by the parent, not the child.
       buf[strlen(buf)-1] = 0;  // chop \n
       if(chdir(buf+3) < 0) //llamada el sistema para cambiar de directorio
@@ -165,9 +172,13 @@ main(void)
       continue;
     }
     if(fork1() == 0) //si es diferente de cd 
-      runcmd(parsecmd(buf)); //parsea el siguiene comando, es necesario capturar la tecla de flechita para eejcuta lo anterior
+	runcmd(parsecmd(buf)); //parsea el siguiene comando, es necesario capturar la tecla de flechita para eejcuta lo anterior
+	  for(i=0; i<100; i++)
+	  {
+		  prevbuf[i]=buf[i];
+	  }
     wait();
-  }
+  } }
   exit();
 }
 
