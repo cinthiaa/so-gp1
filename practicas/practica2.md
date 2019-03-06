@@ -32,5 +32,6 @@ GIT
  
  ## URL commit
  Pte1: https://github.com/cinthiaa/so-gp1/commit/7c44b48fc135da37ffed6e8f4c0ae546e16da94
+ pte2: https://github.com/cinthiaa/so-gp1/commit/8774a2a6803ff64aa02f6ceaf3bf509f573afa86
  
  
