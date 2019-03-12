@@ -547,7 +547,7 @@ int sys_setpriority(void){
 			return 0;
 		}
 	}
-	return 1;	
+	return -1;	
 }
 
 int sys_getpriority(void){
@@ -562,6 +562,6 @@ int sys_getpriority(void){
 			return ptable.proc[i].priority;
 		}
 	}
-	return 1;	
+	return -1;	
 }
 

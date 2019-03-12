@@ -173,8 +173,9 @@ main(void)
     }
     if(fork1() == 0) //si es diferente de cd 
 	runcmd(parsecmd(buf)); //parsea el siguiene comando, es necesario capturar la tecla de flechita para eejcuta lo anterior
-	i=0;
-	while(prevbuf[i]=buf[i]) i++;	
+	for(i=0; i <100; i++){
+		prevbuf[i]=buf[i];
+	}
     wait();
   } }
   exit();
