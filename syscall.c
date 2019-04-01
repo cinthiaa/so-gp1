@@ -12,7 +12,7 @@
 // Arguments on the stack, from the user call to the C
 // library system call function. The saved user %esp points
 // to a saved program counter, and then the first argument.
-
+uint prev_write=0;
 // Fetch the int at addr from the current process.
 int
 fetchint(uint addr, int *ip)
@@ -107,6 +107,7 @@ extern int sys_shutdown(void);
 extern int sys_reboot(void);
 extern int sys_setpriority(void);
 extern int sys_getpriority(void);
+extern int sys_date(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -133,8 +134,14 @@ static int (*syscalls[])(void) = {
 [SYS_shutdown]   sys_shutdown,
 [SYS_reboot]   sys_reboot,	
 [SYS_setpriority] sys_setpriority,
-[SYS_getpriority] sys_getpriority,	
+[SYS_getpriority] sys_getpriority,
+[SYS_date] sys_date,	
 };
+
+char *syscalls_names[25] = {
+	"fork", "exit", "wait", "pipe", "read", "kill", "exec", "fstat", "chdir", "dup", "getpid", "sbrk",
+	"sleep", "uptime", "open" , "write", "mknod", "unlink", "link", "mkdir", "close", "shutdown","reboot", "setpriority", "getpriority"
+}; 
 
 void
 syscall(void)
@@ -144,7 +151,17 @@ syscall(void)
 
   num = curproc->tf->eax;
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
-    curproc->tf->eax = syscalls[num]();
+	if(num != 16 )  
+	{ 
+		cprintf("%s -> %d\n", syscalls_names[num-1], num);
+		prev_write = 0;
+	}	
+	else if (!prev_write)
+	{
+		cprintf("%s -> %d\n", syscalls_names[num-1], num);
+		prev_write=1;
+	}
+	 curproc->tf->eax = syscalls[num]();
   } else {
     cprintf("%d %s: unknown sys call %d\n",
             curproc->pid, curproc->name, num);
