@@ -138,9 +138,9 @@ static int (*syscalls[])(void) = {
 [SYS_date] sys_date,	
 };
 
-char *syscalls_names[25] = {
+char *syscalls_names[26] = {
 	"fork", "exit", "wait", "pipe", "read", "kill", "exec", "fstat", "chdir", "dup", "getpid", "sbrk",
-	"sleep", "uptime", "open" , "write", "mknod", "unlink", "link", "mkdir", "close", "shutdown","reboot", "setpriority", "getpriority"
+	"sleep", "uptime", "open" , "write", "mknod", "unlink", "link", "mkdir", "close", "shutdown","reboot", "setpriority", "getpriority","date"
 }; 
 
 void
