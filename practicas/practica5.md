@@ -27,4 +27,5 @@ git
 +Los semaforos y locks son mecanismos que se utilizan cuando hay problemas de sincronizacion, los semaforos indican la disponibilidad de los recursos y los locks se utilizan cuando hay secciones criticas
 
 #URL del commit
+ https://github.com/cinthiaa/so-gp1/commit/aadefc8d2fd19a49ef8e2c2f4d27008dd0dc159e
    
